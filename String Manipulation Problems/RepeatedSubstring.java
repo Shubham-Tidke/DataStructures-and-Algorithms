@@ -21,28 +21,11 @@ Explanation: It is the substring "abc" four times or the substring "abcabc" twic
 public class RepeatedSubstring {
 	
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Input String: ");
-		String str = sc.nextLine();
-		RepeatedSubstring obj = new RepeatedSubstring();
-		boolean result = obj.repeatedSubstringPattern(str);
-		System.out.println(result);
+		String str ="abab";
+		System.out.println(isRepeated(str));
 	}
-	private boolean repeatedSubstringPattern(String str) {
-		 int l = str.length();
-		    for(int i=l/2;i>=1;i--) {
-		        if(l%i==0) {
-		            int m = l/i;
-		            String sub= str.substring(0,i);
-		            StringBuilder sb = new StringBuilder();
-		            for(int j=0;j<m;j++) {
-		                sb.append(sub);
-		            }
-		            if(sb.toString().equals(str))
-		            	return true;
-		        }
-		    }
-		    return false;
+	private static boolean isRepeated(String str) {
+		String temp = str+str;
+		return temp.substring(1, temp.length()-1).contains(str);
 	}
-
 }
