@@ -8,37 +8,18 @@ import java.util.Scanner;
 public class NonRepeatingFirst {
 
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Input String : ");
-		String str = sc.nextLine();
-		
-		NonRepeatingFirst obj = new NonRepeatingFirst();
-		obj.nonRepeating(str);
-		
-
+		String str = "aabb";
+		System.out.println(getFirstNonRepeating(str));
 	}
-
-	private void nonRepeating(String str) {
-		
+	private static char getFirstNonRepeating(String str) {
+		int[]arr=new int[128];
 		for (int i = 0; i < str.length(); i++) {
-			char ch1 =str.charAt(i);
-			int flag = 0;
-			for (int j = i+1; j < str.length(); j++) {
-				char ch2 = str.charAt(j);
-			//	System.out.println(ch1+" "+ch2);
-				if(ch1==ch2)
-				{
-					flag=1;
-				}
-
+			arr[str.charAt(i)]++;
+		}
+		for (int j = 0; j < str.length(); j++) {
+			if(arr[str.charAt(j)]==1) {
+				return str.charAt(j);
 			}
-			if(flag == 0)
-			{
-				System.out.println(ch1);
-				break;
-			}
-			
-		}	
+		}
+		return ' ';
 	}
-
-}

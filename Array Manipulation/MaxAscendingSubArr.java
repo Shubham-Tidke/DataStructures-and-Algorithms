@@ -22,31 +22,21 @@ Output: 33
 Explanation: [10,11,12] is the ascending subarray with the maximum sum of 33.
  */
 public class MaxAscendingSubArr {
-
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int num = sc.nextInt();
-		int arr[] = new int[num];
-		for (int i = 0; i < arr.length; i++) {
-			arr[i] = sc.nextInt();
-		}
-		int maxSum = 0;
-		
-		for (int i = 0; i < arr.length; i++) {
-			int temp = arr[i];
-			while(i+1 < arr.length && arr[i] < arr[i+1])
-			{
-				temp+=arr[i+1];
-				i++;
-			}
-			if(temp>maxSum)
-			{
-				maxSum = temp;
-				
-			}
-		}
-		System.out.println(maxSum);
-
+		int nums[] = {10,20,30,5,10,50};
+		System.out.println(getMaxSumAsc(nums));
 	}
-
+	private static int getMaxSumAsc(int[] nums) {
+		int sum = nums[0];int temp =nums[0];
+		for (int i = 1; i < nums.length; i++) {
+			if(nums[i]>nums[i-1])
+			{
+				temp+=nums[i];
+			}
+			else
+				temp=nums[i];
+			sum = Math.max(temp, sum);
+		}
+		return sum;
+	}
 }
