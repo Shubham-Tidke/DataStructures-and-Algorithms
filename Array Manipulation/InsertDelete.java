@@ -12,77 +12,42 @@ Description - return -1 if element not present
 import java.util.Arrays;
 import java.util.Scanner;
 public class InsertDelete {
-static Scanner sc =  new Scanner(System.in);
 	public static void main(String[] args) {
-		int option;
-		System.out.println("SIZE OF ARRAY : ");
-		int n = sc.nextInt();
-		int arr[] = new int[n];
-		for (int i = 0; i < arr.length; i++) {
-			arr[i] = -1;
-		}	
-		do {
-			System.out.println("Select Operation : 1. Insert in array 2. Delete from array 3. Exit ");
-			option = sc.nextInt();
-			switch (option) {
-			case 1: {
-				System.out.println("Value to insert : ");
-				int value = sc.nextInt();
-				insertOperation(arr,value);
-				break;				
-			}
-			case 2:{
-				System.out.println("Value to delete : ");
-				int value = sc.nextInt();
-				deleteOperation(arr,value);
-				break;
-			}			
-		}			
-	} while (option<3);		
-}	
-	private static void deleteOperation(int[] arr, int value) {
-		 
-		for (int i = 0; i < arr.length; i++) {
-			if(arr[i] == value)
-			{
-				arr[i] = -1;
-			}
-		}
-		CheckEmptySpace(arr);
-		System.out.println(value +" Deleted from array");
-		Arrays.sort(arr);
-		for (int i = 0; i < arr.length; i++) {
-			System.out.print(arr[i]+" ");
-		}
-		System.out.println();
+		int[]arr = {1,2,3,4,5};
+		int size = 5;
+		int value = 2;
+		int capacity = arr.length;
+		size =delete(arr,size,value,capacity);
+		System.out.println(Arrays.toString(arr));
+		size = insert(arr,size,value,capacity);
+		System.out.println(Arrays.toString(arr));
 	}
-	private static void insertOperation(int[] arr, int value) {
-		int space = CheckEmptySpace(arr);
-		if(space == 0)
-			System.out.println("Sorry! Array is already full.");
-		else
-		{
-			for (int i = 0; i < arr.length; i++) {
-				if(arr[i]==-1)
-				{
-					arr[i] = value;
-					System.out.println(value+" added in array");
-					break;
-				}			
-			}
-			Arrays.sort(arr);
-		}	
-		for (int i = 0; i < arr.length; i++) {
-			System.out.print(arr[i]+" ");
+	private static int insert(int[] arr, int n, int value, int capacity) {
+		if(n>=capacity) System.out.println("Already full");
+		for (int i = 0; i< arr.length; i++) {
+			if(arr[i]==-1)
+				arr[i]=value;
 		}
-		System.out.println();	
+		Arrays.parallelSort(arr);
+		return n+1;
 	}
-	private static int CheckEmptySpace(int[] arr) {
-		int count = 0;
-		for (int i = 0; i < arr.length; i++) {
-			if(arr[i] == -1)
-				count++;
+	private static int delete(int[] arr, int n, int value, int capacity) {
+		int index = binarysearch(arr,0,n-1,value);
+		if(index == -1)System.out.println("element not found!");
+		else {
+			for (int i = index; i < n-1; i++) {
+				arr[i] = arr[i+1];
+			}
+			arr[n-1] =-1;
 		}
-		return count;		
+		return n-1;
+	}
+	private static int binarysearch(int[] arr, int low, int high, int value) {
+		if(low>high)return -1;
+		int mid = (high+low)/2;
+		if(value == arr[mid])return mid;
+		else if(value>arr[mid])
+			return binarysearch(arr, mid+1, high, value);
+		return binarysearch(arr, low, mid-1, value);
 	}
 }
