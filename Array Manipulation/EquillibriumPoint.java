@@ -15,42 +15,20 @@ Output: -1
  */
 import java.util.Scanner;
 public class EquillibriumPoint {
-	static Scanner sc  = new Scanner(System.in);
 	public static void main(String[] args) {
-		System.out.println("Size of array : ");
-		int n = sc.nextInt();
-		int arr[] = new int[n];
-		System.out.println("Enter elements : ");
+		int arr[] = {-7, 1, 5, 2, -4, 3, 0} ;
+		System.out.println(getEquillibriumIndex(arr));
+	}
+	private static int getEquillibriumIndex(int[] arr) {	
+		int sum  = 0;
+		int tempSum = 0;
 		for (int i = 0; i < arr.length; i++) {
-			arr[i] = sc.nextInt();
+			sum+=arr[i];
 		}
-		EquillibriumPoint e = new EquillibriumPoint();
-		int value = e.findEquillibrium(arr);
-		System.out.println(value);	
-	}
-	private int findEquillibrium(int[] arr) {
-		for (int i = 1; i < arr.length; i++) {
-			int left = leftSum(arr,0,i);
-			int right = rightSum(arr,i+1,arr.length);
-			if (left == right) 
-				return i;
-		}
-		return -1;	
-	}
-	private int leftSum(int[] arr, int x, int y) {
-		int sum = 0;
-		for (int i = x; i < y; i++) {
-			sum += arr[i];		
-		}
-	//	System.out.println("LeftSum: "+sum);
-		return sum;
-	}
-	private int rightSum(int[] arr, int x, int y) {
-		int sum = 0;
-		for (int i = x; i < y; i++) {
-			sum += arr[i];
-		}
-	//	System.out.println("RightSum: " +sum);
-		return sum;
+		for (int i = 0; i < arr.length; tempSum += arr[i++]) {
+            if (tempSum * 2 == sum - arr[i]) 
+            	return i;
+            }
+		return -1;
 	}
 }
