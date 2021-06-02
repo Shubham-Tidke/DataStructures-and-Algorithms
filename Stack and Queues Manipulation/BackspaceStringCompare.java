@@ -24,49 +24,21 @@ Explanation: s becomes "c" while t becomes "b".
 public class BackspaceStringCompare {
 	
 	public static void main(String[] args) {
-		String str1 = "a#c";
-		String str2 = "b";
-		BackspaceStringCompare obj = new BackspaceStringCompare();
-		obj.CheckString(str1,str2);
+		String s ="ab##";
+		String t ="c#d#";
+		System.out.println(checkBackspace(s,t));
 	}
-
-	private void CheckString(String str1, String str2) {
-		Stack st1 = new Stack();
-		Stack st2 = new Stack();
-		for (int i = 0; i < str1.length(); i++) {
-			if(str1.charAt(i)=='#' && !st1.empty()) {	
-				st1.pop();
-			}
-			else
-			{
-				st1.push(str1.charAt(i));
-			}
-			for (int i1 = 0; i1 < str2.length(); i1++) {
-				if(str2.charAt(i1)=='#' && !st2.empty()) {	
-					st2.pop();
-				}
-				else
-				{
-					st2.push(str2.charAt(i1));
-				}	
-			}
-								
-		}
-		if(st1.size() == st2.size())
-		{
-			int count = 0;
-			for (int j = 0; j < st1.size(); j++)
-			{
-				if((st1.pop()).equals(st2.pop()))
-					count++;
-			}
-			if(count == st1.size())
-				System.out.println("true");
-			else
-				System.out.println("False");
-		}
-		else
-			System.out.println("False");	
+	private static boolean checkBackspace(String s, String t) {
+		return helper(s).equals(helper(t));
 	}
-
+	private static Stack<Character> helper(String str) {
+		Stack<Character>stack = new Stack<Character>();
+		for(char ch : str.toCharArray()){
+			if(ch!='#')
+				stack.push(ch);
+			else if(!stack.isEmpty())
+				stack.pop();
+		}
+		return stack;
+	}
 }
