@@ -29,3 +29,14 @@ public class NthTribonacci {
 	}
 
 }
+/* Faster solution
+ * int first = 0;int second = 1;int third = 1;
+		if(n<2)return n;
+		for (int i = 2; i < n; i++) {
+			int sum = first+second+third;
+			first = second;
+			second = third;
+			third = sum;
+		}
+		return third;
+ */
