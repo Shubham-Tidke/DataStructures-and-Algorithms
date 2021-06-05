@@ -22,16 +22,14 @@ public class minimumIndexedChar {
 		System.out.println(obj.minimumIndex(str,patt));
 	}
 	private char minimumIndex(String str, String patt) {
-		HashMap<Integer, Character>map = new HashMap<Integer, Character>();
-		char ch ='$';
+		HashSet<Character>set = new HashSet<Character>();
 		for (int i = 0; i < patt.length(); i++) {
-			map.put(i,  patt.charAt(i));
+			set.add(patt.charAt(i));
 		}
 		for (int i = 0; i < str.length(); i++) {
-			if(map.containsValue(str.charAt(i))) {
+			if(set.contains(str.charAt(i)))
 				return str.charAt(i);
-			}
 		}
-		return ch;
+		return '$';
 	}
 }
