@@ -1,74 +1,45 @@
-/*
- * Find Intersection of 2 linked lists
- */
-class IntersectionNode
-{
-	static class Node
-	{
+import java.util.HashSet;
+
+public class IntersectionNode {
+	static class node{
 		int data;
-		Node next;
-	};
-static int Intesection(Node head1, Node head2)
-{
-	Node temp1 = head1;
-	Node temp2 = head2;
-
-	if (temp1 == null || temp2 == null )
-		return -1;
-
-	while (temp1 != null && temp2 != null
-		&& temp1 != temp2)
-	{
-		temp1 = temp1.next;
-		temp2 = temp2.next;
-
-		if (temp1 == temp2)
-			return temp1.data;
-
-		if (temp1 == null )
-			temp1 = head2;
-		if (temp2 == null )
-			temp2 = head1;
+		node next;
+		public node(int data) {
+			this.data = data;
+			this.next = null;
+		}
+	} node head;
+	public IntersectionNode() {
+		head = null;
 	}
-
-	return temp1.data;
+	public static void main(String[] args) {
+		IntersectionNode obj1 = new IntersectionNode();
+		obj1.head = new node(4);
+		obj1.head.next = new node(1);
+		obj1.head.next.next = new node(8);
+		obj1.head.next.next.next = new node(4);
+		obj1.head.next.next.next = new node(5);
+		IntersectionNode obj2 = new IntersectionNode();
+		obj2.head = new node(6);
+		obj2.head.next = new node(1);
+		obj2.head.next.next = obj1.head.next.next;
+		obj2.head.next.next.next = obj1.head.next.next.next;
+		System.out.println(getIntersectionNode(obj1.head,obj2.head).data);
+	}
+	private static node getIntersectionNode(node head1, node head2) {
+		HashSet<node>set = new HashSet<node>();
+		node temp = head1;
+		while(temp!=null) {
+			set.add(temp);
+			temp = temp.next;
+		}
+		temp = head2;
+		while(temp!=null) {
+			if(set.contains(temp))
+				return temp;
+			set.add(temp);
+			temp = temp.next;
+		}
+		return null;
+	}
 }
-
-
-public static void main(String[] args)
-{
-	Node newNode;
-	Node head1 = new Node();
-	head1.data = 4;
-
-	newNode = new Node();
-	newNode.data = 1;
-	head1.next = newNode;
-	
-	Node head2 = new Node();
-	head2.data = 5;
-
-	newNode = new Node();
-	newNode.data = 6;
-	head2.next = newNode;
-
-	newNode = new Node();
-	newNode.data = 1;
-	head2.next.next = newNode;
-
-	newNode = new Node();
-	newNode.data = 8;
-	head1.next.next = newNode;
-	head2.next.next.next = newNode;
-
-	newNode = new Node();
-	newNode.data = 4;
-	head1.next.next.next = newNode;
-
-	head1.next.next.next.next = null;
-
-	System.out.print(Intesection(head1, head2));
-}
-}
-
-// This code is contributed by 29AjayKumar
