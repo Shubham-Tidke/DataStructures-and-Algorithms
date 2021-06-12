@@ -16,11 +16,16 @@ public class searchInsertPos {
 		System.out.println(insertPos(arr,target));
 	}
 	private static int insertPos(int[] arr, int target) {
-		for (int i = 0; i < arr.length; i++) {
-			if(arr[i] >= target) {
-				return i;
-			}
+		int low= 0;int high = nums.length-1;
+		int mid =0; 
+		while(low<=high) {
+			mid = (low+high)/2;
+			if(nums[mid] == target) return mid;
+			if(nums[mid]<target)
+				low = mid+1;
+			if(nums[mid]>target)
+				high = mid-1;	
 		}
-		return arr.length;
+		return low;
 	}
 }
