@@ -13,6 +13,8 @@ Example 2:
 Input: n = 2
 Output: 0.50000
 Explanation: The second person has a probability of 0.5 to get the second seat (when first person gets the first seat).
+
+https://leetcode.com/problems/airplane-seat-assignment-probability/
  */
 public class airplaneSeatProbability {
 
